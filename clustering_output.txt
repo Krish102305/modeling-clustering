@@ -1,0 +1,50 @@
+members=330, cols=7, mean extras spend=$26.01
+train=231, test=99
+
+k, within-group sum of squares (training):
+  k=1:   1155.0
+  k=2:    772.7  (drop from k-1: 33.1%)
+  k=3:    446.1  (drop from k-1: 42.3%)
+  k=4:    242.9  (drop from k-1: 45.5%)
+  k=5:    219.0  (drop from k-1: 9.9%)
+  k=6:    198.2  (drop from k-1: 9.5%)
+  k=7:    183.8  (drop from k-1: 7.3%)
+  k=8:    171.6  (drop from k-1: 6.6%)
+
+k, test spread (sum of squared distances to nearest TRAINING center), drop from k-1:
+  k=1:    500.8
+  k=2:    326.4  (drop 34.8%)
+  k=3:    214.3  (drop 34.3%)
+  k=4:    114.8  (drop 46.4%)
+  k=5:    107.7  (drop 6.2%)
+  k=6:    101.2  (drop 6.0%)
+  k=7:     93.3  (drop 7.8%)
+  k=8:     87.1  (drop 6.7%)
+Test spread k=1: 500.8   k=4: 114.8   (77.1% lower)
+Train spread k=1: 1155.0   k=4: 242.9   (79.0% lower)
+
+chosen k = 4
+
+Segment centroids (original units):
+    age  visits_per_month  avg_visit_minutes  classes_per_month  months_member  n_members  avg_extras_spend  share_spend_under_20
+0  27.3               3.0               40.7                0.9            5.8         70               9.3                   0.8
+1  64.2              12.0               46.5                3.9           57.8         60              16.4                   0.6
+2  33.2              16.0               64.3                0.9           30.1        110              24.9                   0.4
+3  42.7               9.3               55.2                7.0           24.0         90              46.8                   0.0
+
+BASELINE (credit to everyone): net $-1,200/month over 330 members ($-3.64 per member)
+Net of giving the credit, by segment (sum over members in the segment):
+         sum  mean  size
+segment                 
+0        185  2.64    70
+1        -45 -0.75    60
+2       -455 -4.14   110
+3       -885 -9.83    90
+
+segments that get the credit (positive net on training members): [0]
+v1 (credit to chosen segments only): net $185/month  ($0.56 per member)
+improvement over baseline: $1,385/month = $16,620/yr
+  train (231 members): baseline $-855, v1 $110
+  test  (99 members): baseline $-345, v1 $75
+
+New member {'age': 30, 'visits_per_month': 4, 'avg_visit_minutes': 42, 'classes_per_month': 1, 'months_member': 5} (extras spend $10, not used for segmentation): -> (0, 'credit')
